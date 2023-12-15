@@ -5,9 +5,13 @@ Title IT Vietnam 2023
 color e
 Echo ************************[USERNAME\HOSTNAME]>%temp%\IT.txt
 echo.
-systeminfo | find /i "System Model">>%temp%\IT.txt
 (echo %username% & hostname) >>%temp%\IT.txt
+(systeminfo | find /i "System Model" & systeminfo | find /i "Domain" & systeminfo | find /i "OS" & systeminfo | find /i "Total Physical Memory:")>>%temp%\IT.txt
 echo.
+echo.
+wmic bios get serialnumber>>%temp%\IT.txt
+echo.
+wmic diskdrive get model,index,serialnumber,size /format:table>>%temp%\IT.txt
 Echo ************************[IPv4 Ethernet]>>%temp%\IT.txt
 echo.
 IPCONFIG | FINDSTR /R "Ethernet* Address.*[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*">>%temp%\IT.txt
@@ -20,7 +24,10 @@ echo.
 echo CARD MANG DA CONNECTED>>%temp%\IT.txt
 getmac | FINDSTR /R "Tcpip* Address.*[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*">>%temp%\IT.txt
 echo.
-wmic bios get serialnumber>>%temp%\IT.txt
+echo.
+echo NIC card>>%temp%\IT.txt
+wmic nic get caption, index | findstr /v "Index=1">>%temp%\IT.txt
+
 start notepad.exe %temp%\IT.txt
 
 
