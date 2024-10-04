@@ -11,7 +11,11 @@ echo.
 echo.
 wmic bios get serialnumber>>%temp%\IT.txt
 echo.
-wmic diskdrive get model,index,serialnumber,size /format:table>>%temp%\IT.txt
+wmic cpu get NumberOfCores,NumberOfLogicalProcessors,name /format:list>>%temp%\IT.txt
+echo.
+wmic diskdrive get model,index,serialnumber,size /format:list>>%temp%\IT.txt
+echo.
+wmic memorychip get serialnumber, partnumber, ConfiguredClockspeed, Speed, manufacturer /format:list>>%temp%\IT.txt
 Echo ************************[IPv4 Ethernet]>>%temp%\IT.txt
 echo.
 IPCONFIG | FINDSTR /R "Ethernet* Address.*[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*">>%temp%\IT.txt
